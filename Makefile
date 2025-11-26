@@ -5,11 +5,12 @@ TARGET = livraria
 LIMPAR = rm
 
 all: objetos
-	$(CC) $(OBJS)/menus.o $(OBJS)/main.o -o $(TARGET)
-
+	$(CC) $(OBJS)/menus.o $(OBJS)/cadastros.o $(OBJS)/main.o -o $(TARGET)
+	
 
 objetos:
 	$(CC) -c $(SRC)/menus.c -o $(OBJS)/menus.o
+	$(CC) -c $(SRC)/cadastros.c -o $(OBJS)/cadastros.o
 	$(CC) -c main.c -o $(OBJS)/main.o
 
 

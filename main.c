@@ -1,4 +1,5 @@
 #include "./include/menus.h"
+#include "./include/cadastros.h"
 
 #define FIM     0
 
@@ -6,6 +7,14 @@ int main()
 {
     int opcao_menu_principal;
     int opcao_sub_menu;
+
+    // Bases de dados (clientes e livros)
+    struct base_dados_cliente clientes;
+    struct base_dados_livro livros;
+
+    // Inicializar as bases de dados
+    inicializar_base_clientes(&clientes);
+    inicializar_base_livros(&livros);
 
     do {
         opcao_menu_principal = menu_principal();
@@ -15,7 +24,8 @@ int main()
             case 1: do {
                         opcao_sub_menu = sub_menu_cadastros();
                         switch (opcao_sub_menu) {
-                            case 1: break;
+                            case 1: inserir_cliente_base_dados(&clientes, novo_cliente(&clientes.contador), 1);
+                                    break;
                             case 2: break;                            
                         }
                     } while (opcao_sub_menu != FIM);

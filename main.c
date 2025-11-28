@@ -1,5 +1,8 @@
 #include "./include/menus.h"
 #include "./include/cadastros.h"
+#include "./include/relatorios.h"
+#include <stdio.h>
+
 
 #define FIM     0
 
@@ -24,9 +27,12 @@ int main()
             case 1: do {
                         opcao_sub_menu = sub_menu_cadastros();
                         switch (opcao_sub_menu) {
+
                             case 1: inserir_cliente_base_dados(&clientes, novo_cliente(&clientes.contador), 1);
                                     break;
-                            case 2: break;                            
+
+                            case 2: inserir_livro_base_dados(&livros, novo_livro(&livros.contador), 2);
+                                    break;                            
                         }
                     } while (opcao_sub_menu != FIM);
 
@@ -35,9 +41,15 @@ int main()
             case 2: do {
                         opcao_sub_menu = sub_menu_relatorios();
                         switch (opcao_sub_menu) {
-                            case 1: break;
-                            case 2: break;
+                            
+                            case 1: listar_clientes(clientes.inicio);
+                                    break;
+                            
+                            case 2: listar_livros(livros.inicio);
+                                    break;
+
                             case 3: break;
+
                             case 4: break;          
                         }
                     } while (opcao_sub_menu != FIM);

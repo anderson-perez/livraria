@@ -1,4 +1,5 @@
 #include "../include/menus.h"
+#include <stdio.h>
 
 int menu_principal()
 {
@@ -10,6 +11,7 @@ int menu_principal()
     printf("0.Sair do programa\n");
     printf(":: ");
     scanf("%i", &opcao);
+    getchar();
 
     return opcao;
 }
@@ -23,6 +25,7 @@ int sub_menu_cadastros()
     printf("0.Voltar ao menu principal\n");
     printf(":: ");
     scanf("%i", &opcao);
+    getchar();
 
     return opcao;
 }
@@ -38,6 +41,7 @@ int sub_menu_relatorios()
     printf("0.Voltar ao menu principal\n");
     printf(":: ");
     scanf("%i", &opcao);
+    getchar();
 
     return opcao;
 }

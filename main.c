@@ -1,6 +1,7 @@
 #include "./include/menus.h"
 #include "./include/cadastros.h"
 #include "./include/relatorios.h"
+#include "./include/arquivos.h"
 #include <stdio.h>
 
 
@@ -18,6 +19,9 @@ int main()
     // Inicializar as bases de dados
     inicializar_base_clientes(&clientes);
     inicializar_base_livros(&livros);
+
+    carregar_dados_clientes(&clientes);
+    carregar_dados_livros(&livros);
 
     do {
         opcao_menu_principal = menu_principal();
@@ -59,6 +63,8 @@ int main()
             case 3: break;
 
             case 0: printf("Tchau!!!\n");
+                    salvar_dados_livros(livros.inicio);
+                    salvar_dados_clientes(clientes.inicio);
                     break;
         }
 

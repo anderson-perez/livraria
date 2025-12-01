@@ -48,7 +48,11 @@ int sub_menu_relatorios()
 
 int sub_menu_consultas()
 {
+    int opcao;
 
+    
+
+    return opcao;
 }
 
 int sub_menu_tipo_relatorio()

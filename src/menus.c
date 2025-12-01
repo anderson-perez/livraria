@@ -50,3 +50,19 @@ int sub_menu_consultas()
 {
 
 }
+
+int sub_menu_tipo_relatorio()
+{
+    int opcao;
+
+    printf("1.Tela\n");
+    printf("2.Arquivo texto sem formatacao\n");
+    printf("3.Arquivo texto para Excel (csv)\n");
+    printf("4.Arquivo html\n");
+    printf("0.Voltar ao menu anterior\n");
+    printf(":: ");
+    scanf("%i", &opcao);
+    getchar();
+
+    return opcao;
+}

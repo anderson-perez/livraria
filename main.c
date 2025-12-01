@@ -2,6 +2,8 @@
 #include "./include/cadastros.h"
 #include "./include/relatorios.h"
 #include "./include/arquivos.h"
+#include "./include/utils.h"
+#include <string.h>
 #include <stdio.h>
 
 
@@ -10,7 +12,8 @@
 int main()
 {
     int opcao_menu_principal;
-    int opcao_sub_menu;
+    int opcao_sub_menu, opcao_sub_sub_menu;
+    string nome_arq;
 
     // Bases de dados (clientes e livros)
     struct base_dados_cliente clientes;
@@ -46,7 +49,43 @@ int main()
                         opcao_sub_menu = sub_menu_relatorios();
                         switch (opcao_sub_menu) {
                             
-                            case 1: listar_clientes(clientes.inicio);
+                            case 1: do {
+                                        opcao_sub_sub_menu = sub_menu_tipo_relatorio();
+
+                                        switch (opcao_sub_sub_menu) {
+
+                                            case 1: // Tela
+                                                    listar_clientes(clientes.inicio);
+                                                    break;
+
+                                            case 2: // Txt sem formatação
+                                                    printf("Nome do arquivo? ");
+                                                    fgets(nome_arq, T_STR, stdin);
+                                                    retirar_enter(nome_arq);
+                                                    strcat(nome_arq, ".txt");
+                                                    exportar_dados_clientes_txt(clientes.inicio, nome_arq);
+                                                    break;
+                                            
+                                            case 3: // CSV
+                                                    printf("Nome do arquivo? ");
+                                                    fgets(nome_arq, T_STR, stdin);
+                                                    retirar_enter(nome_arq);
+                                                    strcat(nome_arq, ".csv");
+                                                    exportar_dados_clientes_csv(clientes.inicio, nome_arq);
+                                                    break;
+
+                                            case 4: // HTML
+                                                    printf("Nome do arquivo? ");
+                                                    fgets(nome_arq, T_STR, stdin);
+                                                    retirar_enter(nome_arq);
+                                                    strcat(nome_arq, ".html");
+                                                    exportar_dados_clientes_html(clientes.inicio, nome_arq);
+                                                    break;
+                                        }
+
+
+                                    } while (opcao_sub_sub_menu != FIM);
+                                    
                                     break;
                             
                             case 2: listar_livros(livros.inicio);

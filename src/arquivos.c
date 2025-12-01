@@ -1,6 +1,7 @@
 #include "../include/arquivos.h"
 #include "../include/cadastros.h"
 #include "../include/types.h"
+#include "../include/relatorios.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -96,4 +97,66 @@ void carregar_dados_clientes(struct base_dados_cliente *clientes)
     }
 
     fclose(fp);    
+}
+
+void exportar_dados_clientes_txt(struct dados_cliente *clientes, char *nome_arq)
+{
+    FILE *fp = NULL;
+
+    fp = fopen(nome_arq, "w");
+
+    if (!fp) {
+        printf("Erro ao tentar abrir arquivo %s\n", nome_arq);
+        return;
+    }
+
+    while (clientes) {
+        mostrar_dados_cliente(clientes, fp);
+        fprintf(fp, "\n");
+        clientes = clientes->prox;
+    }
+
+    fclose(fp);
+}
+
+void exportar_dados_clientes_csv(struct dados_cliente *clientes, char *nome_arq)
+{
+    FILE *fp = NULL;
+
+    fp = fopen(nome_arq, "w");
+
+    if (!fp) {
+        printf("Erro ao tentar abrir arquivo %s\n", nome_arq);
+        return;
+    }
+
+    fprintf(fp, "ID;NOME;EMAIL;TELEFONE\n");
+    while (clientes) {
+        fprintf(fp, "%i;%s;%s;%s\n", clientes->id, clientes->nome, clientes->email, clientes->telefone);
+        clientes = clientes->prox;
+    }
+
+    fclose(fp);
+}
+
+void exportar_dados_clientes_html(struct dados_cliente *clientes, char *nome_arq)
+{
+    FILE *fp = NULL;
+
+    fp = fopen(nome_arq, "w");
+
+    if (!fp) {
+        printf("Erro ao tentar abrir arquivo %s\n", nome_arq);
+        return;
+    }
+
+    fprintf(fp, "<HTML> <HEAD> <TITLE> RELATORIO DE CLIENTES </TITLE> </HEAD> <BODY> \n");
+    fprintf(fp, "<TABLE border = '1'> <TR> <TH> ID </TH> <TH> NOME </TH> <TH> EMAIL </TH> <TH> TELEFONE </TH> </TR>\n");
+    while (clientes) {
+        fprintf(fp, "<TR> <TD> %i </TD> <TD> %s </TD> <TD>%s</TD> <TD>%s</TD> </TR>\n", clientes->id, clientes->nome, clientes->email, clientes->telefone);
+        clientes = clientes->prox;
+    }
+    fprintf(fp, "</TABLE> </BODY> </HTML>\n");
+
+    fclose(fp);
 }

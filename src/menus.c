@@ -50,7 +50,12 @@ int sub_menu_consultas()
 {
     int opcao;
 
-    
+    printf("1.Livro por titulo\n");
+    printf("2.Cliente por nome\n");
+    printf("0.Voltar ao menu principal\n");
+    printf(":: ");
+    scanf("%i", &opcao);
+    getchar();
 
     return opcao;
 }

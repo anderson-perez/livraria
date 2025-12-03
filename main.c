@@ -3,6 +3,7 @@
 #include "./include/relatorios.h"
 #include "./include/arquivos.h"
 #include "./include/utils.h"
+#include "./include/consultas.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -13,7 +14,7 @@ int main()
 {
     int opcao_menu_principal;
     int opcao_sub_menu, opcao_sub_sub_menu;
-    string nome_arq;
+    string nome_arq, titulo;
 
     // Bases de dados (clientes e livros)
     struct base_dados_cliente clientes;
@@ -99,7 +100,27 @@ int main()
 
                     break;
             
-            case 3: break;
+            case 3: do {
+                        opcao_sub_menu = sub_menu_consultas();
+
+                        switch (opcao_sub_menu) {
+                                case 1: printf("Qual o titulo do livro? ");
+                                        fgets(titulo, T_STR, stdin);
+                                        retirar_enter(titulo);
+                                        formatar_maiuscula(titulo);
+                                        struct dados_livro *aux = localizar_livro_por_nome(titulo, livros.inicio);
+                                        if (aux) {
+                                                mostrar_dados_livro(aux, stdout);
+                                        }
+                                        else {
+                                                printf("Livro %s nao encontrado!\n", titulo);
+                                        }
+                                        break;
+                                case 2: break;                                
+                        }
+                } while (opcao_sub_menu != FIM);
+                    
+                    break;
 
             case 0: printf("Tchau!!!\n");
                     salvar_dados_livros(livros.inicio);
